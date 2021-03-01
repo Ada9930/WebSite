@@ -1,0 +1,107 @@
+﻿@model ClassWeb.Models.Class.DetailModel
+@{
+    ViewBag.Title = "課程資料維護頁";
+}
+@using (Html.BeginForm())
+{
+    switch (Model.ActionMode)
+    {
+        case "Add":
+            <h1>新增課程資料</h1>
+            break;
+        case "Update":
+            <h1>修改課程資料</h1>
+            break;
+        case "Delete":
+            <h1>刪除課程資料</h1>
+            break;
+    }
+    <h2>課程資料</h2>
+
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                課號
+            </dt>
+
+            <dd>
+                @if (Model.ActionMode == "Add")
+                {
+                    <label>自動編號</label>
+                }
+                else
+                {
+                    @Html.DisplayFor(o => o.No, new { htmlAttributes = new { @class = "form-control" } })
+                    <input type="hidden" name="No" value="@Model.No" />
+                }
+
+            </dd>
+
+            <dt>
+                課名
+            </dt>
+
+            <dd>
+                @if (Model.ActionMode != "Delete")
+                {
+                    @Html.EditorFor(o => o.Name, new { htmlAttributes = new { @class = "form-control" } })
+                }
+                else
+                {
+                    @Html.DisplayFor(o => o.Name)
+                }
+            </dd>
+
+            <dt>
+                學分數
+            </dt>
+
+            <dd>
+                @if (Model.ActionMode != "Delete")
+                {
+                    @Html.EditorFor(o => o.Credit, new { htmlAttributes = new { @class = "form-control" } })
+                }
+                else
+                {
+                    @Html.DisplayFor(o => o.Credit)
+                }
+            </dd>
+
+            <dt>
+                教室
+            </dt>
+
+            <dd>
+                @if (Model.ActionMode != "Delete")
+                {
+                    @Html.EditorFor(o => o.Place, new { htmlAttributes = new { @class = "form-control" } })
+                }
+                else
+                {
+                    @Html.DisplayFor(o => o.Place)
+                }
+            </dd>
+
+            <dt>
+                教師
+            </dt>
+
+            <dd>
+                @if (Model.ActionMode != "Delete")
+                {
+                    @Html.EditorFor(o => o.Teacher, new { htmlAttributes = new { @class = "form-control" } })
+                }
+                else
+                {
+                    @Html.DisplayFor(o => o.Teacher)
+                }
+            </dd>
+        </dl>
+    </div>
+    <p>
+        <input type="submit" value="存檔" class="btn btn-outline-dark" />
+        @Html.ActionLink("返回", "SearchList", new { }, new { @class = "btn btn-outline-dark" })
+    </p>
+}
+

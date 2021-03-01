@@ -1,0 +1,87 @@
+﻿@model ClassWeb.Models.TakeClass.TakeClassListModel
+@{
+    ViewBag.Title = "SearchList";
+    int i = 0;
+}
+<h1>修課資料</h1>
+<script>
+    function SetActionMode(mode, studentno) {
+        if (mode != "Add") {
+            $("#StudentNo").val(studentno);
+        }
+        $("#ActionMode").val(mode);
+    }
+</script>
+@using (Html.BeginForm())
+{
+    <input type="hidden" name="ActionMode" id="ActionMode" value="" />
+
+    <table style="width:100%">
+        <tr>
+            <th class="text-right">
+                學生姓名:
+            </th>
+            <td>
+                @Html.DropDownListFor(o => o.StudentNo, Model.StudentSelectList)
+            </td>
+        </tr>
+        <tr>
+            <th class="text-right">
+                課程:
+            </th>
+            <td>
+                @foreach (var classData in Model.ClassNoList)
+                {
+                    string classNoList = "ClassNoList[" + i + "]";
+                    <input type="hidden" name="@string.Concat(classNoList, ".ClassNo")" value="@classData.ClassNo" />
+                    @Html.CheckBox(string.Concat(classNoList, ".IsCheck"))
+                    @classData.ClassName
+                    i++;
+                }
+
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" class="text-right">
+                <input type="submit" value="存檔" onclick="SetActionMode('Add');" class="btn btn-outline-dark" />
+            </td>
+        </tr>
+    </table>
+
+    <br />
+    <table class="table table-striped">
+        <thead class="thead-light">
+            <tr>
+                <th>
+                </th>
+                <th>
+                    學生
+                </th>
+                <th>
+                    課程
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.dataItemList != null)
+            {
+                foreach (var item in Model.dataItemList)
+                {
+                    <tr>
+                        <td>
+                            <input type="submit" value="修改" onclick="SetActionMode('Update', '');" class="btn btn-outline-dark" />
+                            <input type="submit" value="刪除" onclick="SetActionMode('Delete', '');" class="btn btn-outline-dark" />
+                        </td>
+                        <td>
+                            @item.Student
+                        </td>
+                        <td>
+                            @string.Join("、", item.Class)
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+}
+

@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SchoolModelStoreContainer" CdmEntityContainer="SchoolEntities">
+    <EntitySetMapping Name="Class">
+      <EntityTypeMapping TypeName="SchoolModel.Class">
+        <MappingFragment StoreEntitySet="Class">
+          <ScalarProperty Name="Class_No" ColumnName="Class_No" />
+          <ScalarProperty Name="Class_Name" ColumnName="Class_Name" />
+          <ScalarProperty Name="Class_Credit" ColumnName="Class_Credit" />
+          <ScalarProperty Name="Class_Place" ColumnName="Class_Place" />
+          <ScalarProperty Name="Class_Teacher" ColumnName="Class_Teacher" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Student">
+      <EntityTypeMapping TypeName="SchoolModel.Student">
+        <MappingFragment StoreEntitySet="Student">
+          <ScalarProperty Name="Student_No" ColumnName="Student_No" />
+          <ScalarProperty Name="Student_Name" ColumnName="Student_Name" />
+          <ScalarProperty Name="Student_Birthday" ColumnName="Student_Birthday" />
+          <ScalarProperty Name="Student_Email" ColumnName="Student_Email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TakeClass">
+      <EntityTypeMapping TypeName="SchoolModel.TakeClass">
+        <MappingFragment StoreEntitySet="TakeClass">
+          <ScalarProperty Name="TakeClass_Student" ColumnName="TakeClass_Student" />
+          <ScalarProperty Name="TakeClass_Class" ColumnName="TakeClass_Class" />
+          <ScalarProperty Name="TakeClass_Score" ColumnName="TakeClass_Score" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

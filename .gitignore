@@ -1,0 +1,7 @@
+ClassWeb/ClassWeb.csproj.user
+packages/
+ClassWeb/bin/
+ClassWeb/obj/Debug/
+.vs/ClassWeb/v16/.suo
+.vs/ClassWeb/config/applicationhost.config
+ClassWeb.Repository/bin/

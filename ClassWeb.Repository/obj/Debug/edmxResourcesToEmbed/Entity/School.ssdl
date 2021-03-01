@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SchoolModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Class">
+    <Key>
+      <PropertyRef Name="Class_No" />
+    </Key>
+    <Property Name="Class_No" Type="char" MaxLength="4" Nullable="false" />
+    <Property Name="Class_Name" Type="nvarchar" MaxLength="20" />
+    <Property Name="Class_Credit" Type="int" />
+    <Property Name="Class_Place" Type="nvarchar" MaxLength="20" />
+    <Property Name="Class_Teacher" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="Student_No" />
+    </Key>
+    <Property Name="Student_No" Type="char" MaxLength="5" Nullable="false" />
+    <Property Name="Student_Name" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Student_Birthday" Type="date" Nullable="false" />
+    <Property Name="Student_Email" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="TakeClass">
+    <Key>
+      <PropertyRef Name="TakeClass_Student" />
+      <PropertyRef Name="TakeClass_Class" />
+    </Key>
+    <Property Name="TakeClass_Student" Type="char" MaxLength="5" Nullable="false" />
+    <Property Name="TakeClass_Class" Type="char" MaxLength="4" Nullable="false" />
+    <Property Name="TakeClass_Score" Type="int" />
+  </EntityType>
+  <Association Name="FK_TakeClass_Class">
+    <End Role="Class" Type="Self.Class" Multiplicity="1" />
+    <End Role="TakeClass" Type="Self.TakeClass" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Class">
+        <PropertyRef Name="Class_No" />
+      </Principal>
+      <Dependent Role="TakeClass">
+        <PropertyRef Name="TakeClass_Class" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TakeClass_Student">
+    <End Role="Student" Type="Self.Student" Multiplicity="1" />
+    <End Role="TakeClass" Type="Self.TakeClass" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="Student_No" />
+      </Principal>
+      <Dependent Role="TakeClass">
+        <PropertyRef Name="TakeClass_Student" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="SchoolModelStoreContainer">
+    <EntitySet Name="Class" EntityType="Self.Class" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TakeClass" EntityType="Self.TakeClass" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_TakeClass_Class" Association="Self.FK_TakeClass_Class">
+      <End Role="Class" EntitySet="Class" />
+      <End Role="TakeClass" EntitySet="TakeClass" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TakeClass_Student" Association="Self.FK_TakeClass_Student">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="TakeClass" EntitySet="TakeClass" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

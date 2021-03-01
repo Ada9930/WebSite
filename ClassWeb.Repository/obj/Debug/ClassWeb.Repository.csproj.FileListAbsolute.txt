@@ -1,0 +1,14 @@
+D:\ClassWeb\ClassWeb\ClassWeb.Repository\bin\Debug\ClassWeb.Repository.dll.config
+D:\ClassWeb\ClassWeb\ClassWeb.Repository\bin\Debug\ClassWeb.Repository.dll
+D:\ClassWeb\ClassWeb\ClassWeb.Repository\bin\Debug\ClassWeb.Repository.pdb
+D:\ClassWeb\ClassWeb\ClassWeb.Repository\bin\Debug\EntityFramework.dll
+D:\ClassWeb\ClassWeb\ClassWeb.Repository\bin\Debug\EntityFramework.SqlServer.dll
+D:\ClassWeb\ClassWeb\ClassWeb.Repository\bin\Debug\EntityFramework.xml
+D:\ClassWeb\ClassWeb\ClassWeb.Repository\bin\Debug\EntityFramework.SqlServer.xml
+D:\ClassWeb\ClassWeb\ClassWeb.Repository\obj\Debug\ClassWeb.Repository.csprojAssemblyReference.cache
+D:\ClassWeb\ClassWeb\ClassWeb.Repository\obj\Debug\ClassWeb.Repository.csproj.CoreCompileInputs.cache
+D:\ClassWeb\ClassWeb\ClassWeb.Repository\obj\Debug\ClassWeb.Repository.csproj.CopyComplete
+D:\ClassWeb\ClassWeb\ClassWeb.Repository\obj\Debug\ClassWeb.Repository.dll
+D:\ClassWeb\ClassWeb\ClassWeb.Repository\obj\Debug\ClassWeb.Repository.pdb
+D:\ClassWeb\ClassWeb\ClassWeb.Repository\bin\Debug\zh-Hant\EntityFramework.resources.dll
+D:\ClassWeb\ClassWeb\ClassWeb.Repository\bin\Debug\zh-Hant\EntityFramework.SqlServer.resources.dll

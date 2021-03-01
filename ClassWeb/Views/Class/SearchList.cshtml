@@ -1,0 +1,107 @@
+﻿@model ClassWeb.Models.Class.SearchListModel
+@{
+    ViewBag.Title = "課程資料搜尋頁";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h1>課程資料</h1>
+@using (Html.BeginForm())
+{
+    <table style="width:100%">
+        <tbody style="width:100%">
+            <tr>
+                <th class="text-right">
+                    課號:
+                </th>
+                <td>
+                    @Html.EditorFor(o => o.No, new { htmlAttributes = new { @class = "form-control" } })
+                </td>
+                <th class="text-right">
+                    學分數:
+                </th>
+                <td>
+                    @Html.EditorFor(o => o.Credit, new { htmlAttributes = new { @class = "form-control" } })
+                </td>
+                <th class="text-right">
+                    教師%:
+                </th>
+                <td>
+                    @Html.EditorFor(o => o.Teacher, new { htmlAttributes = new { @class = "form-control" } })
+                </td>
+            </tr>
+            <tr>
+                <th class="text-right">
+                    課名%:
+                </th>
+                <td>
+                    @Html.EditorFor(o => o.Name, new { htmlAttributes = new { @class = "form-control" } })
+                </td>
+                <th class="text-right">
+                    教室:
+                </th>
+                <td>
+                    @Html.EditorFor(o => o.Place, new { htmlAttributes = new { @class = "form-control" } })
+                </td>
+            </tr>
+            <tr>
+                <td colspan="6" class="text-right">
+                    <input type="submit" value="查詢" class="btn btn-outline-dark" />
+                    @Html.ActionLink("新增", "Detail", new { ActionMode = "Add" }, new { @class = "btn btn-outline-dark" })
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <br />
+    <table class="table table-striped">
+        <thead class="thead-light">
+            <tr>
+                <th>
+                </th>
+                <th>
+                    課號
+                </th>
+                <th>
+                    課名
+                </th>
+                <th>
+                    學分數
+                </th>
+                <th>
+                    教室
+                </th>
+                <th>
+                    教師
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.classList != null)
+            {
+                foreach (ClassWeb.Repository.Entity.Class item in Model.classList)
+                {
+                    <tr>
+                        <td>
+                            @Html.ActionLink("修改", "Detail", new { ActionMode = "Update", No = item.Class_No }, new { @class = "btn btn-outline-dark" })
+                            @Html.ActionLink("刪除", "Detail", new { ActionMode = "Delete", No = item.Class_No }, new { @class = "btn btn-outline-dark" })
+                        </td>
+                        <td>
+                            @item.Class_No
+                        </td>
+                        <td>
+                            @item.Class_Name
+                        </td>
+                        <td>
+                            @item.Class_Credit
+                        </td>
+                        <td>
+                            @item.Class_Place
+                        </td>
+                        <td>
+                            @item.Class_Teacher
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+}
+

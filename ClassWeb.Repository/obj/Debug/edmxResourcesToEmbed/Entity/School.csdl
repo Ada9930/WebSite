@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SchoolModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Class">
+    <Key>
+      <PropertyRef Name="Class_No" />
+    </Key>
+    <Property Name="Class_No" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Class_Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Class_Credit" Type="Int32" />
+    <Property Name="Class_Place" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Class_Teacher" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="TakeClass" Relationship="Self.FK_TakeClass_Class" FromRole="Class" ToRole="TakeClass" />
+  </EntityType>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="Student_No" />
+    </Key>
+    <Property Name="Student_No" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Student_Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Student_Birthday" Type="DateTime" Precision="0" Nullable="false" />
+    <Property Name="Student_Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="TakeClass" Relationship="Self.FK_TakeClass_Student" FromRole="Student" ToRole="TakeClass" />
+  </EntityType>
+  <EntityType Name="TakeClass">
+    <Key>
+      <PropertyRef Name="TakeClass_Student" />
+      <PropertyRef Name="TakeClass_Class" />
+    </Key>
+    <Property Name="TakeClass_Student" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="TakeClass_Class" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="TakeClass_Score" Type="Int32" />
+    <NavigationProperty Name="Class" Relationship="Self.FK_TakeClass_Class" FromRole="TakeClass" ToRole="Class" />
+    <NavigationProperty Name="Student" Relationship="Self.FK_TakeClass_Student" FromRole="TakeClass" ToRole="Student" />
+  </EntityType>
+  <Association Name="FK_TakeClass_Class">
+    <End Role="Class" Type="Self.Class" Multiplicity="1" />
+    <End Role="TakeClass" Type="Self.TakeClass" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Class">
+        <PropertyRef Name="Class_No" />
+      </Principal>
+      <Dependent Role="TakeClass">
+        <PropertyRef Name="TakeClass_Class" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TakeClass_Student">
+    <End Role="Student" Type="Self.Student" Multiplicity="1" />
+    <End Role="TakeClass" Type="Self.TakeClass" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="Student_No" />
+      </Principal>
+      <Dependent Role="TakeClass">
+        <PropertyRef Name="TakeClass_Student" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="SchoolEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Class" EntityType="Self.Class" />
+    <EntitySet Name="Student" EntityType="Self.Student" />
+    <EntitySet Name="TakeClass" EntityType="Self.TakeClass" />
+    <AssociationSet Name="FK_TakeClass_Class" Association="Self.FK_TakeClass_Class">
+      <End Role="Class" EntitySet="Class" />
+      <End Role="TakeClass" EntitySet="TakeClass" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TakeClass_Student" Association="Self.FK_TakeClass_Student">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="TakeClass" EntitySet="TakeClass" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
