@@ -14,27 +14,43 @@ namespace ClassWeb.Controllers
 
             if (ActionMode != "Add")
             {
-                model.GetDetail();
+                if (!model.GetDetail())
+                {
+                    TempData["ResultMessage"] = model.ErrMsg;
+                    return RedirectToAction("SearchList");
+                }
+
             }
             return View(model);
         }
         [HttpPost]
         public ActionResult Detail(DetailModel model)
         {
-            switch (model.ActionMode)
+            if (model.ActionMode != "Delete" && this.ModelState.IsValid) //如果資料驗證成功
             {
-                case "Add":
-                    model.InsertClass();
-                    break;
-                case "Update":
-                    model.UpdateClass();
-                    break;
-                case "Delete":
-                    model.DeleteClass();
-                    break;
+                switch (model.ActionMode)
+                {
+                    case "Add":
+                        model.InsertClass();
+                        break;
+                    case "Update":
+                        model.UpdateClass();
+                        break;
+                    case "Delete":
+                        model.DeleteClass();
+                        break;
+                }
+                return RedirectToAction("SearchList");
             }
+            else
+            {
+                //失敗訊息
+                ViewBag.ResultMessage = "資料有誤，請檢查";
+                return View(model);
+            }
+                
 
-            return RedirectToAction("SearchList");
+            
         }
     }
 }

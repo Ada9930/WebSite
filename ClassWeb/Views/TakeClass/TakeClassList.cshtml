@@ -6,13 +6,39 @@
 <h1>修課資料</h1>
 <script>
     function SetActionMode(mode, studentno) {
+        var _errMsg='';
+        var checkAny = false;
         if (mode != "Add") {
             $("#StudentNo").val(studentno);
         }
+        else
+        {
+            if ($('#StudentNo').val() == '') {
+                _errMsg = "請選擇修課學生\n";
+            }
+
+            $('input:checkbox[name$=IsCheck]').each(function () {
+                if ($(this).prop('checked')) {
+                    checkAny = true;
+                }
+            });
+
+            if (checkAny == false) {
+                _errMsg += "請至少選擇一個課程";
+            }
+        }
+
         $("#ActionMode").val(mode);
+
+        if (_errMsg > '') {
+            alert(_errMsg);
+        } else {
+            $('#TakeClassForm').submit();
+        }
+
     }
 </script>
-@using (Html.BeginForm())
+@using (Html.BeginForm("TakeClassList", "TakeClass", FormMethod.Post, new { name = "TakeClassForm", id = "TakeClassForm" }))
 {
     <input type="hidden" name="ActionMode" id="ActionMode" value="" />
 
@@ -34,7 +60,7 @@
                 {
                     string classNoList = "ClassNoList[" + i + "]";
                     <input type="hidden" name="@string.Concat(classNoList, ".ClassNo")" value="@classData.ClassNo" />
-                    @Html.CheckBox(string.Concat(classNoList, ".IsCheck"))
+                    @Html.CheckBox(string.Concat(classNoList, ".IsCheck"), (classData.IsCheck)? new { @checked = classData.IsCheck } :null)
                     @classData.ClassName
                     i++;
                 }
@@ -43,7 +69,7 @@
         </tr>
         <tr>
             <td colspan="2" class="text-right">
-                <input type="submit" value="存檔" onclick="SetActionMode('Add');" class="btn btn-outline-dark" />
+                <input type="button" value="存檔" onclick="SetActionMode('Add');" class="btn btn-outline-dark" />
             </td>
         </tr>
     </table>
@@ -69,8 +95,8 @@
                 {
                     <tr>
                         <td>
-                            <input type="submit" value="修改" onclick="SetActionMode('Update', '');" class="btn btn-outline-dark" />
-                            <input type="submit" value="刪除" onclick="SetActionMode('Delete', '');" class="btn btn-outline-dark" />
+                            <input type="button" value="修改" onclick="SetActionMode('Update', '@item.Student');" class="btn btn-outline-dark" />
+                            <input type="button" value="刪除" onclick="SetActionMode('Delete', '@item.Student');" class="btn btn-outline-dark" />
                         </td>
                         <td>
                             @item.Student

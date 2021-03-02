@@ -22,7 +22,7 @@ namespace ClassWeb.Controllers
         {
             switch(model.ActionMode)
             {
-                case "Add":
+                case "Add": //修改等同新增, 為避免資料異常, 多筆資料時, 先刪除後新增資料
                     model.AddTakeClassList();
                     break;
                 case "Delete":

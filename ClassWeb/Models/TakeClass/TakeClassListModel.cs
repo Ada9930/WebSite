@@ -26,18 +26,21 @@ namespace ClassWeb.Models.TakeClass
             public List<string> Class { get; set; }
         }
 
+        //取得課程選取清單
         public void GetClassList()
         {
             using (ClassWeb.Repository.Entity.SchoolEntities DBEntity = new Repository.Entity.SchoolEntities())
             {
-                List<ClassWeb.Repository.Entity.Class> ClassList = DBEntity.Class.ToList();
                 List<ClassWeb.Repository.Entity.TakeClass> takeClassList = new List<Repository.Entity.TakeClass>();
+                
+                //當為修改時,將資料帶出
                 if(ActionMode == "Update")
                 {
                     takeClassList = DBEntity.TakeClass.Where(o => o.TakeClass_Student == StudentNo).ToList();
                 }
+
                 ClassNoList = new List<ClassItem>();
-                foreach(ClassWeb.Repository.Entity.Class classData in ClassList)
+                foreach(ClassWeb.Repository.Entity.Class classData in DBEntity.Class.ToList())
                 {
                     ClassNoList.Add(new ClassItem()
                     {
@@ -50,6 +53,7 @@ namespace ClassWeb.Models.TakeClass
             }
         }
 
+        //取得學生資料 並塞入下拉清單
         public void GetStudentList()
         {
             using (ClassWeb.Repository.Entity.SchoolEntities DBEntity = new Repository.Entity.SchoolEntities())
@@ -59,12 +63,13 @@ namespace ClassWeb.Models.TakeClass
                 StudentSelectList.Add(new SelectListItem { Value = string.Empty, Text = string.Empty });
                 foreach (ClassWeb.Repository.Entity.Student student in studnetList)
                 {
-                    StudentSelectList.Add(new SelectListItem() { Value = student.Student_No, Text = student.Student_Name });
+                    StudentSelectList.Add(new SelectListItem() { Value = student.Student_No, Text = string.Concat(student.Student_No, " ",student.Student_Name) });
 
                 }
             }
         }
 
+        //將修課資料塞入顯示清單
         public void GetTakeClassList()
         {
             using (ClassWeb.Repository.Entity.SchoolEntities DBEntity = new Repository.Entity.SchoolEntities())
@@ -95,6 +100,8 @@ namespace ClassWeb.Models.TakeClass
                     DBEntity.TakeClass.Add(takeClass);
                 }
                 DBEntity.SaveChanges();
+                StudentNo = string.Empty;
+                ClassNoList = new List<ClassItem>();
             }
         }
 

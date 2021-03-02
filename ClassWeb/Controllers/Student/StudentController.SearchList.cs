@@ -16,7 +16,7 @@ namespace ClassWeb.Controllers.Student
         {
             //取得查詢資料
             model.GetSearchList();
-
+            ViewBag.ResultMessage = TempData["ResultMessage"];
             return View(model);
         }
     }

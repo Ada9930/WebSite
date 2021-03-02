@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace ClassWeb.Models.Class
@@ -74,6 +75,10 @@ namespace ClassWeb.Models.Class
                 ClassWeb.Repository.Entity.Class classData = DBEntity.Class.Where(o => o.Class_No == No).FirstOrDefault();
 
                 DBEntity.Class.Remove(classData);
+
+                //一併刪除該學生修課紀錄避免資料關聯異常
+                List<ClassWeb.Repository.Entity.TakeClass> takeClass = DBEntity.TakeClass.Where(o => o.TakeClass_Class == No).ToList();
+                DBEntity.TakeClass.RemoveRange(takeClass);
 
                 DBEntity.SaveChanges();
             }

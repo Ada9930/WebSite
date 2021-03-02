@@ -14,7 +14,11 @@ namespace ClassWeb.Controllers.Student
 
             if (ActionMode != "Add")
             {
-                model.GetDetail();
+                if (!model.GetDetail())
+                {
+                    TempData["ResultMessage"] = model.ErrMsg;
+                    return RedirectToAction("SearchList");
+                }
             }
             return View(model);
         }

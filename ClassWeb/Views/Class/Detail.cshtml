@@ -17,7 +17,10 @@
             break;
     }
     <h2>課程資料</h2>
-
+    if (ViewBag.ResultMessage != null)
+    {
+        @Html.ValidationSummary(true, (string)ViewBag.ResultMessage, new { @class = "text-danger" })
+    }
     <div>
         <hr />
         <dl class="dl-horizontal">
@@ -46,6 +49,7 @@
                 @if (Model.ActionMode != "Delete")
                 {
                     @Html.EditorFor(o => o.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(o => o.Name, "", new { @class = "text-danger" })
                 }
                 else
                 {
@@ -61,6 +65,7 @@
                 @if (Model.ActionMode != "Delete")
                 {
                     @Html.EditorFor(o => o.Credit, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(o => o.Credit, "", new { @class = "text-danger" })
                 }
                 else
                 {
@@ -69,13 +74,14 @@
             </dd>
 
             <dt>
-                教室
+                上課地點
             </dt>
 
             <dd>
                 @if (Model.ActionMode != "Delete")
                 {
                     @Html.EditorFor(o => o.Place, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(o => o.Place, "", new { @class = "text-danger" })
                 }
                 else
                 {
@@ -84,13 +90,14 @@
             </dd>
 
             <dt>
-                教師
+                講師姓名
             </dt>
 
             <dd>
                 @if (Model.ActionMode != "Delete")
                 {
                     @Html.EditorFor(o => o.Teacher, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(o => o.Teacher, "", new { @class = "text-danger" })
                 }
                 else
                 {

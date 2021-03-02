@@ -9,6 +9,7 @@ namespace ClassWeb.Controllers
         public ActionResult SearchList()
         {
             SearchListModel model = new SearchListModel();
+            
             return SearchList(model);
         }
         [HttpPost]
@@ -16,7 +17,7 @@ namespace ClassWeb.Controllers
         {
             //取得查詢結果
             model.GetSearchList();
-
+            ViewBag.ResultMessage = TempData["ResultMessage"];
             return View(model);
         }
     }

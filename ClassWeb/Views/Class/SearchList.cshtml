@@ -6,6 +6,10 @@
 <h1>課程資料</h1>
 @using (Html.BeginForm())
 {
+    if (ViewBag.ResultMessage != null)//判斷如果有訊息，則顯示。
+    {
+        @Html.Label("info", (string)ViewBag.ResultMessage, new { @class = "text-danger" })
+    }
     <table style="width:100%">
         <tbody style="width:100%">
             <tr>

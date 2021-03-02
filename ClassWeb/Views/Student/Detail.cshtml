@@ -18,7 +18,7 @@
             break;
     }
     <h2>學生資料</h2>
-    @Html.AntiForgeryToken()
+  
     if (ViewBag.ResultMessage != null)
     {
         @Html.ValidationSummary(true, (string)ViewBag.ResultMessage, new { @class = "text-danger" })

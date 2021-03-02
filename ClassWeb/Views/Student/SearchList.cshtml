@@ -6,19 +6,23 @@
 <h1>學生資料</h1>
 @using (Html.BeginForm())
 {
+    if (ViewBag.ResultMessage != null)//判斷如果有訊息，則顯示。
+    {
+        @Html.Label("info", (string)ViewBag.ResultMessage, new { @class = "text-danger" })
+    }
     <table style="width:100%">
         <tbody style="width:100%">
             <tr>
                 <th class="text-right">
                     學號:
                 </th>
-                <td >
+                <td>
                     @Html.EditorFor(o => o.No, new { htmlAttributes = new { @class = "form-control" } })
                 </td>
                 <th class="text-right">
                     生日:
                 </th>
-                <td >
+                <td>
                     @Html.EditorFor(o => o.Birthday, new { htmlAttributes = new { @class = "form-control" } })
                 </td>
             </tr>
